@@ -44,9 +44,8 @@ public class NetRequest
 		return null;
 	}
 
-	public NetResponse pullCookies(String strUrl, String strBody, IRhoSession oSession)throws Exception
+	public NetResponse pullCookies(String strUrl, String strBody, IRhoSession oSession, HashMap headers) throws Exception
 	{
-		HashMap headers = new HashMap();
 		m_bIgnoreSuffixOnSim = false;
 		m_bCancel = false;
     	
@@ -275,7 +274,7 @@ public class NetRequest
         return null;
     }
 	
-	public NetResponse pullCookies(String strUrl, String strBody, IRhoSession oSession)throws Exception
+	public NetResponse pullCookies(String strUrl, String strBody, IRhoSession oSession, Hashtable pHeaders)throws Exception
 	{
 		return null;
 	}

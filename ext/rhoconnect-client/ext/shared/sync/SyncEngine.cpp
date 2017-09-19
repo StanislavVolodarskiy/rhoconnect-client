@@ -1078,7 +1078,12 @@ void CSyncEngine::login(String name, String password, const CSyncNotification& o
 	//try {
     loadAllSources();
 
-    NetResponse resp = getNet().pullCookies( getProtocol().getLoginUrl(), getProtocol().getLoginBody(name, password), this );
+    NetResponse resp = getNet().pullCookies(
+        getProtocol().getLoginUrl(),
+        getProtocol().getLoginBody(name, password),
+        this,
+        getProtocol().getLoginHeaders()
+    );
     int nErrCode = RhoAppAdapter.getErrorFromResponse(resp);
     if ( nErrCode != RhoAppAdapter.ERR_NONE )
     {

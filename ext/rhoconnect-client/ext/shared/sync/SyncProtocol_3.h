@@ -62,11 +62,15 @@ struct CSyncProtocol_3 : public ISyncProtocol
 {
     String m_strContentType;
     String m_strClientIDHeader;
+    Hashtable<String, String> m_loginHeaders;
 
     CSyncProtocol_3()
     {
         m_strContentType = "application/json";
         m_strClientIDHeader = "X-RhoConnect-CLIENT-ID";
+        m_loginHeaders = Hashtable<String, String>();
+        m_loginHeaders.put("Content-Type", "application/json; charset=utf-8");
+        m_loginHeaders.put("Accept", "application/json");
     }
 
     const String& getClientIDHeader() const { return m_strClientIDHeader; }
@@ -81,6 +85,11 @@ struct CSyncProtocol_3 : public ISyncProtocol
     String getLoginBody( const String& name, const String& password)
     {
         return "{\"login\":" + json::CJSONEntry::quoteValue(name) + ",\"password\":" + json::CJSONEntry::quoteValue(password) + ",\"remember_me\":1}";
+    }
+
+    Hashtable<String, String> *getLoginHeaders()
+    {
+        return &m_loginHeaders;
     }
 
     const char* getClientCreateMethod()

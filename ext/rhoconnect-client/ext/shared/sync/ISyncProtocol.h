@@ -63,6 +63,7 @@ struct ISyncProtocol
 
     virtual String getLoginUrl() = 0;
     virtual String getLoginBody( const String& name, const String& password)=0;
+    virtual String getLoginHeaders() = 0;
     
     virtual const char* getClientCreateMethod() = 0;
     virtual String getClientCreateUrl() = 0;

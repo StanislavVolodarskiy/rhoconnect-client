@@ -66,6 +66,7 @@ struct CSyncProtocol_4 : public ISyncProtocol
     String m_strAppNamespace;
     String m_strClientNamespace;
     String m_strSANamespace;
+    Hashtable<String, String> m_loginHeaders;
 
     CSyncProtocol_4()
     {
@@ -74,6 +75,9 @@ struct CSyncProtocol_4 : public ISyncProtocol
         m_strClientNamespace = "rc/v1/clients/";
         m_strSANamespace = "app/v1/";
         m_strClientIDHeader = "X-RhoConnect-CLIENT-ID";
+        m_loginHeaders = Hashtable<String, String>();
+        m_loginHeaders.put("Content-Type", "application/json; charset=utf-8");
+        m_loginHeaders.put("Accept", "application/json");
     }
 
     const String& getAppNamespaceUrl()
@@ -103,6 +107,11 @@ struct CSyncProtocol_4 : public ISyncProtocol
     String getLoginBody( const String& name, const String& password)
     {
         return "{\"login\":" + json::CJSONEntry::quoteValue(name) + ",\"password\":" + json::CJSONEntry::quoteValue(password) + ",\"remember_me\":1}";
+    }
+
+    Hashtable<String, String> *getLoginHeaders()
+    {
+        return &m_loginHeaders;
     }
 
     const char* getClientCreateMethod()
